@@ -16,21 +16,31 @@ use App\Models\Listing;
 |
 */
 //all listings
-Route::get('/', function () {
-    return view('listing',  [
-        'name' => 'James',
-        'listings' => Listing::all()
-    ]);
-});
+// Route::get('/', [App\Http\Controllers\ListingController::class, 'index'])->name('home');
+ Route::get('/', [App\Http\Controllers\ListingController::class, 'index']);
+
 
 //single listing
-Route::get('/listing/{id}', function ($id) {
-    return view('single-listing', [
-        'listing' => Listing::find($id)
-    ]);
-});
- 
-Route::get('/dbconn', function(){
+
+//eloquent model 
+// Route::get('/listing/{id}', function ($id) {
+//     $listing = Listing::find($id);  
+
+//     if ($listing) {
+//         return view('single-listing', [
+//             'listing' => $listing
+//         ]);
+//     } else {
+//         abort(404);
+//     }
+// });
+
+
+
+//route model binding
+Route::get('/listing/{listing}', [App\Http\Controllers\ListingController::class, 'show']);
+
+Route::get('/dbconn', function () {
     return view('dbconn');
 });
 
@@ -43,3 +53,13 @@ Route::get('/dbconn', function(){
 // Route::get('/search', function (Request $request) {
 //     dd($request);
 // });
+
+//list of seven common resources routes
+//index - show all listings
+//show - show single listing
+//create - show form to create new listing
+//store - save new listing
+//edit - show form to edit listing
+//update - save edited listing
+//destroy - delete listing
+
