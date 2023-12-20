@@ -37,8 +37,6 @@ use App\Models\Listing;
 
 
 
-//route model binding
-Route::get('/listing/{listing}', [App\Http\Controllers\ListingController::class, 'show']);
 
 Route::get('/dbconn', function () {
     return view('dbconn');
@@ -63,3 +61,25 @@ Route::get('/dbconn', function () {
 //update - save edited listing
 //destroy - delete listing
 
+//show create form
+Route::get('/listings/create', [App\Http\Controllers\ListingController::class, 'create']);
+
+
+//save new listing
+Route::post('/listings', [App\Http\Controllers\ListingController::class, 'store']);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//route model binding
+Route::get('/listing/{listing}', [App\Http\Controllers\ListingController::class, 'show']);
