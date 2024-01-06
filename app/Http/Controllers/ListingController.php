@@ -64,8 +64,8 @@ class ListingController extends Controller
         }
 
 
-        //    Listing::create($formFields + ['user_id' => auth()->id()]);
-        Listing::create($formFields);
+           Listing::create($formFields + ['user_id' => auth()->id()]);
+        // Listing::create($formFields);
 
 
         return redirect('/')->with('mssg', 'Thanks for your listing');
@@ -94,8 +94,10 @@ class ListingController extends Controller
             $formFields['logo'] = request()->file('logo')->store('logos', 'public');
         }
 
-        $listing->update($formFields);
+        $formFields['user_id'] = auth()->id();
 
+        $listing->update($formFields);
+ 
         return back()->with('mssg', 'Listing updated succesfully');
     }
 
@@ -107,3 +109,4 @@ class ListingController extends Controller
         return redirect('/')->with('mssg', 'Listing deleted succesfully');
     }
 }
+
