@@ -64,35 +64,35 @@ Route::get('/dbconn', function () {
 //destroy - delete listing
 
 //show create form
-Route::get('/listings/create', [App\Http\Controllers\ListingController::class, 'create']);
+Route::get('/listings/create', [App\Http\Controllers\ListingController::class, 'create'])->middleware('auth');
 
 
 //save new listing
-Route::post('/listings', [App\Http\Controllers\ListingController::class, 'store']);
+Route::post('/listings', [App\Http\Controllers\ListingController::class, 'store'])->middleware('auth');
 
 //show edit form
-Route::get('/listings/{listing}/edit', [App\Http\Controllers\ListingController::class, 'edit']);
+Route::get('/listings/{listing}/edit', [App\Http\Controllers\ListingController::class, 'edit'])->middleware('auth');
 
 //save edited listing
-Route::put('/listings/{listing}', [App\Http\Controllers\ListingController::class, 'update']);
+Route::put('/listings/{listing}', [App\Http\Controllers\ListingController::class, 'update'])->middleware('auth');
 
 //delete listing
-Route::delete('/listings/{listing}', [App\Http\Controllers\ListingController::class, 'destroy']);
+Route::delete('/listings/{listing}', [App\Http\Controllers\ListingController::class, 'destroy'])->middleware('auth');
 
 //route model binding
 Route::get('/listing/{listing}', [App\Http\Controllers\ListingController::class, 'show']);
 
 //show register form
-Route::get('/register', [UserController::class, 'create']);
+Route::get('/register', [UserController::class, 'create'])->middleware('guest');
 
 //save new user
 Route::post('/users', [UserController::class, 'store']);
 
 //log user out
-Route::post('/logout', [UserController::class, 'destroy']);
+Route::post('/logout', [UserController::class, 'destroy'])->middleware('auth');
 
 //show login form
-Route::get('/login', [UserController::class, 'login']);
+Route::get('/login', [UserController::class, 'login'])->name('login')->middleware('guest');
 
 //log user in
 Route::post('/users/authenticate', [UserController::class, 'authenticate']);
